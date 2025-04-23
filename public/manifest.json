@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "NewsNexus07BrowserExtension",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": "favicon-32x32.png"
+  },
+  "icons": {
+    "48": "favicon-32x32.png"
+  },
+  "permissions": [],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
