@@ -1,0 +1,25 @@
+.divMain {
+  /* padding: 0;
+  margin:0; */
+  font-family: Arial;
+}
+.divArticleDetail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.lblArticleDetailMain {
+  font-weight: bold;
+  /* color: var(--off-white); */
+}
+.lblArticleDetailSub {
+  font-size: 0.6rem;
+  text-align: center;
+}
+.inputArticleDetail {
+  flex: 1;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  /* background-color: var(--gray-medium); */
+  color: black;
+}
