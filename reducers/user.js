@@ -13,6 +13,7 @@ const initialState = {
   navExpandGetArticles: false,
   navExpandManageArticles: false,
   navExpandDb: false,
+  newArticle: {},
 };
 
 export const userSlice = createSlice({
@@ -48,6 +49,9 @@ export const userSlice = createSlice({
     toggleNavExpandDb: (state) => {
       state.navExpandDb = !state.navExpandDb;
     },
+    updateNewArticle: (state, action) => {
+      state.newArticle = action.payload;
+    },
   },
 });
 
@@ -61,5 +65,6 @@ export const {
   toggleNavExpandGetArticles,
   toggleNavExpandManageArticles,
   toggleNavExpandDb,
+  updateNewArticle,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -66,7 +66,7 @@ export default function Login({ onBack }) {
 
   return (
     <div>
-      <h2>Login {import.meta.env.VITE_ENVIRONMENT}</h2>
+      <h2>News Nexus Extension Login</h2>
       <div className={styles.divEmailAndPassword}>
         <div className={styles.divInputGroup}>
           <label htmlFor="email">Email</label>

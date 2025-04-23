@@ -9,7 +9,7 @@
   "icons": {
     "48": "favicon-32x32.png"
   },
-  "permissions": [],
+  "permissions": ["tabs"],
   "background": {
     "scripts": ["background.js"]
   }

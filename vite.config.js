@@ -14,3 +14,16 @@ export default defineConfig({
     emptyOutDir: true,
   },
 });
+
+// // Below is to run in the browser
+// export default defineConfig({
+//   root: "popup",
+//   plugins: [react()],
+//   build: {
+//     outDir: "../dist/popup",
+//     emptyOutDir: true,
+//     rollupOptions: {
+//       input: resolve(__dirname, "popup/index.html"),
+//     },
+//   },
+// });

@@ -44,7 +44,11 @@ export default function Popup() {
 
   return (
     <div className={styles.divMain}>
-      {userReducer.stateArray.length > 0 ? <AddArticle /> : <Login />}
+      {userReducer.stateArray.length > 0 && userReducer.token ? (
+        <AddArticle />
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }

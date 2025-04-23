@@ -5,3 +5,10 @@
   flex-direction: row;
   align-items: center;
 }
+.faXmark {
+  font-size: 2rem;
+  color: gray;
+}
+.faXmark:hover {
+  color: white;
+}

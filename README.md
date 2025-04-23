@@ -13,6 +13,14 @@
 2. click on `Load unpacked`
 3. select the `dist` folder
 
+## .env
+
+```
+VITE_API_BASE_URL=http://localhost:3000
+VITE_API_BASE_URL_SERVER=https://api.news-nexus-dev.kineticmetrics.com
+VITE_ENVIRONMENT=development
+```
+
 ## installations
 
 ```

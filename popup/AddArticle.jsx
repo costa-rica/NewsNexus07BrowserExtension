@@ -1,15 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateNewArticle } from "../reducers/user";
 import styles from "../styles/AddArticle.module.css";
 import NavigationBar from "./common/NavigationBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputDropdownCheckbox from "./common/InputDropdownCheckbox";
 
 export default function AddArticle() {
   const userReducer = useSelector((state) => state.user);
-  const [newArticle, setNewArticle] = useState({});
+  const dispatch = useDispatch();
+  const [newArticle, setNewArticle] = useState(userReducer.newArticle || {});
   const [inputErrors, setInputErrors] = useState({});
   const [stateArray, setStateArray] = useState(userReducer.stateArray);
+
   const handleAddAndSubmitArticle = async () => {
     const selectedStateObjs = stateArray.filter((st) => st.selected);
     const errors = {
@@ -47,6 +50,7 @@ export default function AddArticle() {
     };
 
     setNewArticle(updatedArticle);
+    dispatch(updateNewArticle(updatedArticle));
 
     try {
       const response = await fetch(
@@ -87,6 +91,7 @@ export default function AddArticle() {
           };
 
           setNewArticle(blankArticle);
+          dispatch(updateNewArticle(blankArticle));
           // Deselect all states
           setStateArray(userReducer.stateArray);
         }
@@ -98,11 +103,26 @@ export default function AddArticle() {
     // fetchArticlesArray();
   };
 
+  useEffect(() => {
+    // Check if the browser supports chrome.tabs (it will in extensions)
+    if (chrome && chrome.tabs) {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs[0]?.url) {
+          setNewArticle((prev) => {
+            const result = { ...prev, url: tabs[0].url };
+            dispatch(updateNewArticle(result));
+            return result;
+          });
+        }
+      });
+    }
+  }, []);
+
   return (
     <div className={styles.divMain}>
       <NavigationBar />
-      <h2>Add Article</h2>
       <div className={styles.divMainMiddle}>
+        <h2>Add Article</h2>
         <div className={styles.divArticleDetail}>
           <span className={styles.lblArticleDetailMain}>Publication Name:</span>
           <input
@@ -112,9 +132,10 @@ export default function AddArticle() {
               styles.inputArticleDetail
             }`}
             onChange={(e) =>
-              setNewArticle({
-                ...newArticle,
-                publicationName: e.target.value,
+              setNewArticle((prev) => {
+                const result = { ...prev, publicationName: e.target.value };
+                dispatch(updateNewArticle(result));
+                return result;
               })
             }
           />
@@ -129,7 +150,11 @@ export default function AddArticle() {
               styles.inputArticleDetail
             }`}
             onChange={(e) =>
-              setNewArticle({ ...newArticle, title: e.target.value })
+              setNewArticle((prev) => {
+                const result = { ...prev, title: e.target.value };
+                dispatch(updateNewArticle(result));
+                return result;
+              })
             }
           />
         </div>
@@ -141,7 +166,11 @@ export default function AddArticle() {
             value={newArticle?.url || ""}
             className={styles.inputArticleDetail}
             onChange={(e) =>
-              setNewArticle({ ...newArticle, url: e.target.value })
+              setNewArticle((prev) => {
+                const result = { ...prev, url: e.target.value };
+                dispatch(updateNewArticle(result));
+                return result;
+              })
             }
           />
         </div>
@@ -154,15 +183,17 @@ export default function AddArticle() {
               styles.inputArticleDetail
             }`}
             onChange={(e) =>
-              setNewArticle({ ...newArticle, publishedDate: e.target.value })
+              setNewArticle((prev) => {
+                const result = { ...prev, publishedDate: e.target.value };
+                dispatch(updateNewArticle(result));
+                return result;
+              })
             }
           />
         </div>
         <div className={styles.divArticleDetail}>
-          <div className="tooltipWrapper">
-            <span className={styles.lblArticleDetailMain}>Article State:</span>
-            <span className="tooltipText">State(s) article is relevant to</span>
-          </div>
+          <span className={styles.lblArticleDetailMain}>Article State:</span>
+
           <div className={styles.divManageStates}>
             <InputDropdownCheckbox
               inputObjectArray={stateArray}
@@ -182,9 +213,13 @@ export default function AddArticle() {
               styles.inputArticleDetailContent
             }`}
             onChange={(e) => {
-              setNewArticle({
-                ...newArticle,
-                content: e.target.value,
+              setNewArticle((prev) => {
+                const result = {
+                  ...prev,
+                  content: e.target.value,
+                };
+                dispatch(updateNewArticle(result));
+                return result;
               });
             }}
           />
@@ -195,7 +230,11 @@ export default function AddArticle() {
               <button
                 className={styles.btnClear}
                 onClick={() => {
-                  setNewArticle({});
+                  setNewArticle(() => {
+                    const result = {};
+                    dispatch(updateNewArticle(result));
+                    return result;
+                  });
                 }}
               >
                 Clear
