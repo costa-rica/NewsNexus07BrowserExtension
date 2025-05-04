@@ -1,5 +1,9 @@
 # NewsNexus07BrowserExtension
 
+This is for Chrome mainly
+
+- for firefox see [NewsNexusBrowserExtension01Firefox](https://github.com/costa-rica/NewsNexusBrowserExtension01Firefox)
+
 ## install in Firefox
 
 1. go to `about:debugging` in browser
